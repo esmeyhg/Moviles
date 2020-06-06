@@ -104,6 +104,7 @@ class Comida(Model):
 class Alimento(Model):
     nombreAlimento = CharField(null=False)
     calorias = IntegerField(null=False)
+    fotoAlimento = CharField(null=False)
 
     class Meta:
         database = db
@@ -113,6 +114,7 @@ class ComidaTieneAlimento(Model):
     comidaId = ForeignKeyField(Comida, null=False, backref="alimentosComida")
     alimentoId = ForeignKeyField(Alimento, null=False)
     cantidad = IntegerField(null=False)
+    ingerido = BooleanField(default=False)
 
     class Meta:
         database = db
