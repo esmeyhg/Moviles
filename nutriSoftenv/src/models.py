@@ -1,8 +1,8 @@
 from peewee import *
 
 #db = SqliteDatabase('nutriapp.db')
-db = MySQLDatabase("nutrisoft", host="localhost",
- port = 3306, user = "nutriologo", passwd = "NutriSoft@123")
+db = MySQLDatabase("nutrisoft", host="localhost", 
+                    port = 3306, user = "nutriologo", passwd = "NutriSoft@123")
 
 
 class Rol(Model):
@@ -92,10 +92,16 @@ class Dieta(Model):
     class Meta:
         database = db
 
+class Horario(Model):
+    horario = CharField(null=False)
+
+    class Meta:
+        database = db
 
 class Comida(Model):
     dietaId = ForeignKeyField(Dieta, null=False, backref="comidas")
-    horario = CharField(null=False)
+    horarioId = ForeignKeyField(Horario, null=False, backref="horarioComida")
+    dia = IntegerField(null=False)
 
     class Meta:
         database = db
@@ -130,4 +136,4 @@ class Respueta:
 if __name__ == "__main__":
     db.connect()
     db.create_tables([Rol, Usuario, Paciente, Nutriologo, Mensaje, CatalogoStatus,
-                      Medidas, Cita, Dieta, Comida, Alimento, ComidaTieneAlimento])
+                      Medidas, Cita, Dieta, Comida, Alimento, ComidaTieneAlimento, Horario])
