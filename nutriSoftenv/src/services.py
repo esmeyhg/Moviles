@@ -102,7 +102,7 @@ def enviar_mensaje(usuario_actual, idDestino):
 @token_requerido
 def recuperar_perfil(usuario_actual):
     paciente = Paciente.get_or_none(Paciente.usuarioId_id == usuario_actual.id)
-    #foto = get('https://api.ipify.org').text + "/" + (Path("./images/users") / paciente.fotoPerfil).absolute().as_uri() if paciente.fotoPerfil != "" and paciente.fotoPerfil != None else ""
+    foto = get('https://api.ipify.org').text + "/" + (Path("./images/users") / paciente.fotoPerfil).absolute().as_uri() if paciente.fotoPerfil != "" and paciente.fotoPerfil != None else ""
     if not paciente:
         return jsonify({
             "mensaje": "El usuario no existe",
@@ -121,7 +121,7 @@ def recuperar_perfil(usuario_actual):
             "username": usuario_actual.username,
             "fecha_nacimiento": paciente.fechaNacimiento.strftime("%d %b %Y"),
 	    "fechaFormato": paciente.fechaNacimiento.strftime("%d-%m-%Y"),
-            "fotoPerfil": paciente.fotoPerfil
+            "fotoPerfil": foto.encode('utf-8')
         }
     })
 
